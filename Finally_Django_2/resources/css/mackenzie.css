@@ -9,3 +9,26 @@ h1{
     text-align: center;
     margin-top: 20%;
 }
+
+.container{
+    justify-content: center;
+    display: grid;
+    /* usar o fr para responsividade */
+    grid-template-columns: 200px 200px 200px;
+    grid-auto-rows: 200px;
+    gap: 1em;
+    align-content: center;
+    /* align-items: center; */
+
+    
+}
+
+.item{
+    padding: 2em;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    border: 8px;
+    font: 1.5 rem;
+
+}
