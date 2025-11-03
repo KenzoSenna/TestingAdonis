@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
+import { createUserValidator } from '#validators/user'
 
 export default class UsersController {
   /**
@@ -9,18 +10,20 @@ export default class UsersController {
     const users = await User.query().preload('tasks')
     return users
   }
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {}
 
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) {}
-  /**
-   * Handle form submission for the edit action
-   */
+  async store({ request }: HttpContext) {
+    const {name, email, password} = await request.validateUsing(createUserValidator)
+    const user = await User.create({ name, email, password })
+    return user
+  }
+
+  async show({ params }: HttpContext) {
+
+    const user = await User.query().where('id', params.id).preload('tasks')
+    return user
+
+  }
+
   async update({ params, request }: HttpContext) {}
 
   /**
