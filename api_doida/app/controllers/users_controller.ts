@@ -7,7 +7,7 @@ export default class UsersController {
    */
   async index() {
     const users = await User.query().preload('tasks')
-
+    return users
   }
   /**
    * Handle form submission for the create action
