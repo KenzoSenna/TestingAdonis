@@ -41,8 +41,8 @@ export default class TasksController {
     async update({params, request, response}: HttpContext){
         try{
         const task = await Task.findByOrFail('id', params.id)
-        const {title, description} = await request.validateUsing(createTaskValidator)
-        task.merge({title, description})
+        const {title, description, done} = await request.validateUsing(createTaskValidator)
+        task.merge({title, description, done})
         await task.save()
         return task
         }
